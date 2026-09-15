@@ -42,7 +42,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [280, 20.0]
+    coordinate: [304, 12.0]
     rotation: 0
     state: enabled
 - name: deviation
@@ -54,7 +54,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [368, 20.0]
+    coordinate: [408, 20.0]
     rotation: 0
     state: enabled
 - name: filter_cutoff
@@ -66,7 +66,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [280, 84.0]
+    coordinate: [280, 92.0]
     rotation: 0
     state: enabled
 - name: filter_transition
@@ -102,7 +102,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [176, 20.0]
+    coordinate: [200, 12.0]
     rotation: 0
     state: enabled
 - name: sens
@@ -138,7 +138,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [176, 84.0]
+    coordinate: [192, 84.0]
     rotation: 0
     state: enabled
 - name: analog_frequency_modulator_fc_0
@@ -247,7 +247,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [32, 164.0]
+    coordinate: [24, 204.0]
     rotation: 0
     state: enabled
 - name: blocks_packed_to_unpacked_xx_0
@@ -434,7 +434,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [24, 116.0]
+    coordinate: [16, 140.0]
     rotation: 0
     state: enabled
 - name: low_pass_filter_0

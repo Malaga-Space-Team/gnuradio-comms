@@ -1,0 +1,28 @@
+# template file to be adjusted for your project
+
+CommonSettings: &CommonSettings
+  hashAlgorithm: "SHA-256"
+  authLevel: NONE
+  versionNumber: 4
+  myUsername: "TEST-USER"
+  myPassword: "000000000000"
+  initiatorId: "TEST-USER"
+  heartbeatInterval: 30
+  heartbeatDeadFactor: 3
+
+Providers:
+  myGroundstation:
+    <<: *CommonSettings
+    peerUsername: "TEST-PROVIDER"
+    peerPassword: "000000000000"
+    responderPortId: "TEST_TM_PORT"
+
+    raf-onlt:
+      host: 0.0.0.0
+      port: 23233
+      serviceInstance: "sagr=abc.spack=xyz.rsl-fg=1.raf=onlc99"
+
+    raf-onlc:
+      host: 0.0.0.0
+      port: 23233
+      serviceInstance: "sagr=abc.spack=xyz.rsl-fg=1.raf=onlc99"

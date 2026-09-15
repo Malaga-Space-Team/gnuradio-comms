@@ -1,0 +1,75 @@
+services:
+  - class: org.yamcs.archive.XtceTmRecorder
+  - class: org.yamcs.archive.ParameterRecorder
+  - class: org.yamcs.archive.AlarmRecorder
+  - class: org.yamcs.archive.EventRecorder
+  - class: org.yamcs.archive.ReplayServer
+  - class: org.yamcs.parameter.SystemParametersService
+    args:
+      producers:
+        - fs
+        - jvm
+  - class: org.yamcs.ProcessorCreatorService
+    args:
+      name: realtime
+      type: realtime
+  - class: org.yamcs.archive.CommandHistoryRecorder
+  - class: org.yamcs.parameterarchive.ParameterArchive
+    args:
+      realtimeFiller:
+        enabled: true
+      backFiller:
+        enabled: false
+        warmupTime: 60
+  - class: org.yamcs.plists.ParameterListService
+  - class: org.yamcs.timeline.TimelineService
+
+dataLinks:
+  - name: tm-frames-in
+    class: org.yamcs.tctm.ccsds.UdpTmFrameLink
+    stream: tm_realtime
+    port: 10015
+    frameType: TM
+    spacecraftId: 0
+    frameLength: 223
+    errorDetection: NONE
+    rawFrameDecoder:
+      codec: RS
+      errorCorrectionCapability: 16
+      interleavingDepth: 1
+      derandomize: true
+    virtualChannels:
+      - vcId: 0
+        service: PACKET
+        stream: tm_realtime
+        maxPacketLength: 65536
+        packetPreprocessorClassName: com.example.myproject.MyPacketPreprocessor
+
+  - name: udp-out
+    class: org.yamcs.tctm.UdpTcDataLink
+    stream: tc_realtime
+    host: 255.255.255.255
+    port: 10025
+    commandPostprocessorClassName: com.example.myproject.MyCommandPostprocessor
+
+mdb:
+  # - type: xtce
+  #   args:
+  #     file: mdb/database.xml
+  - type: sheet
+    args:
+      file: mdb/database.xls
+
+# Configuration for streams created at server startup
+streamConfig:
+  tm:
+    - name: "tm_realtime"
+      processor: "realtime"
+    - name: "tm_dump"
+  cmdHist: ["cmdhist_realtime", "cmdhist_dump"]
+  event: ["events_realtime", "events_dump"]
+  param: ["pp_realtime", "pp_dump", "sys_param", "proc_param"]
+  parameterAlarm: ["alarms_realtime"]
+  tc:
+    - name: "tc_realtime"
+      processor: "realtime"

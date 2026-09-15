@@ -1,0 +1,21 @@
+services:
+  yamcs:
+    image: maven:3.9.9-eclipse-temurin-17
+    working_dir: /yamcs
+    hostname: yamcs
+    container_name: yamcs
+    environment:
+      MAVEN_CONFIG: /home/ubuntu/.m2
+    command: "mvn yamcs:run"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8090"]
+      interval: 10s
+      timeout: 5s
+      retries: 30
+      start_period: 30s
+    volumes:
+      - ./app:/yamcs
+      - ./app/.cache/:/home/ubuntu/.m2
+    ports:
+      - "8090:8090"
+      - "10015:10015/udp"
